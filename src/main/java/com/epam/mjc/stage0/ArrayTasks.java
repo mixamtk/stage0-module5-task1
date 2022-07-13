@@ -11,7 +11,7 @@ public class ArrayTasks {
      * Return a String[] array that will list all the seasons of the year, starting with winter.
      */
     public String[] seasonsArray() {
-
+    return new String [] {"inter", "spring", "summer", "authum"};
     }
 
     /**
@@ -25,7 +25,11 @@ public class ArrayTasks {
      * length = 5  -> [1, 2, 3, 4, 5]
      */
     public int[] generateNumbers(int length) {
-
+        int[] ints = new int[length];
+        for (int i = 0; i < length; i++) {
+            ints[i] = i + 1;
+        }
+        return ints;
     }
 
     /**
@@ -37,7 +41,11 @@ public class ArrayTasks {
      * arr = [5, -3, -4] -> sum = -2
      */
     public int totalSum(int[] arr) {
-
+        int sum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            sum += arr[i];
+        }
+        return sum;
     }
 
     /**
@@ -50,7 +58,11 @@ public class ArrayTasks {
      * arr = [5, -3, -4],   number = 10    ->  -1
      */
     public int findIndexOfNumber(int[] arr, int number) {
-
+        int result = -1;
+        for (int i = 0; i < arr.length; i++) {
+            if (number == arr[i]) result = i;
+        }
+        return result;
     }
 
     /**
@@ -63,7 +75,11 @@ public class ArrayTasks {
      * arr = ["pineapple", "apple", "pen"] -> ["pen", "apple", "pineapple"]
      */
     public String[] reverseArray(String[] arr) {
-
+        String[] result = new String[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            result[i] = arr[(arr.length - 1) - i];
+        }
+        return result;
     }
 
     /**
@@ -78,7 +94,16 @@ public class ArrayTasks {
      * arr = [1, 2]         -> [1, 2]
      */
     public int[] getOnlyPositiveNumbers(int[] arr) {
-
+        int resultLen = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0) resultLen++;
+        }
+        int[] result = new int[resultLen];
+        int indResult = 0;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0) {result[indResult] = arr[i]; indResult++;}
+        }
+        return arr;
     }
 
     /**
