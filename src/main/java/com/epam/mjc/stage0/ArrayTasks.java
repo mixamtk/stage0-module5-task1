@@ -117,7 +117,6 @@ public class ArrayTasks {
      * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
-            int[][] arr = new int[][] {{1,5,8,-6},{0,2}};
         for (int i = 0; i < arr.length; i++) {
             arr[i] = mergeSort(arr[i]);
         }
@@ -144,40 +143,57 @@ public class ArrayTasks {
              arr[i + 1] = valueArr;
          }
          }         
-    public static int[] mergeSort(int[] array1) {
-        int[] buffer1 = Arrays.copyOf(array1, array1.length);
-        int[] buffer2 = new int[array1.length];
-        int[] result = mergeSortInner(buffer1, buffer2, 0, array1.length);
-        return result;
+    public static void mergeSort(int[] array, int left, int right) {
+        if (right <= left) return;
+        int mid = (left+right)/2;
+        mergeSort(array, left, mid);
+        mergeSort(array, mid+1, right);
+        merge(array, left, mid, right);
     }
 
-    public static int[] mergeSortInner(int[] buffer1, int[] buffer2,
-                                       int startIndex, int endIndex) {
-        if (startIndex >= endIndex - 1) {
-            return buffer1;
-        }
+    static void merge(int[] array, int left, int mid, int right) {
+        // вычисляем длину
+        int lengthLeft = mid - left + 1;
+        int lengthRight = right - mid;
 
-        // уже отсортирован.
-        int middle = startIndex + (endIndex - startIndex) / 2;
-        int[] sorted1 = mergeSortInner(buffer1, buffer2, startIndex, middle);
-        int[] sorted2 = mergeSortInner(buffer1, buffer2, middle, endIndex);
+        // создаем временные подмассивы
+        int leftArray[] = new int [lengthLeft];
+        int rightArray[] = new int [lengthRight];
 
-        // Слияние
-        int index1 = startIndex;
-        int index2 = middle;
-        int destIndex = startIndex;
-        int[] result = sorted1 == buffer1 ? buffer2 : buffer1;
-        while (index1 < middle && index2 < endIndex) {
-            result[destIndex++] = sorted1[index1] < sorted2[index2]
-                    ? sorted1[index1++] : sorted2[index2++];
+        // копируем отсортированные массивы во временные
+        for (int i = 0; i < lengthLeft; i++)
+            leftArray[i] = array[left+i];
+        for (int i = 0; i < lengthRight; i++)
+            rightArray[i] = array[mid+i+1];
+
+        // итераторы содержат текущий индекс временного подмассива
+        int leftIndex = 0;
+        int rightIndex = 0;
+
+        // копируем из leftArray и rightArray обратно в массив
+        for (int i = left; i < right + 1; i++) {
+            // если остаются нескопированные элементы в R и L, копируем минимальный
+            if (leftIndex < lengthLeft && rightIndex < lengthRight) {
+                if (leftArray[leftIndex] < rightArray[rightIndex]) {
+                    array[i] = leftArray[leftIndex];
+                    leftIndex++;
+                }
+                else {
+                    array[i] = rightArray[rightIndex];
+                    rightIndex++;
+                }
+            }
+            // если все элементы были скопированы из rightArray, скопировать остальные из leftArray
+            else if (leftIndex < lengthLeft) {
+                array[i] = leftArray[leftIndex];
+                leftIndex++;
+            }
+            // если все элементы были скопированы из leftArray, скопировать остальные из rightArray
+            else if (rightIndex < lengthRight) {
+                array[i] = rightArray[rightIndex];
+                rightIndex++;
+            }
         }
-        while (index1 < middle) {
-            result[destIndex++] = sorted1[index1++];
-        }
-        while (index2 < endIndex) {
-            result[destIndex++] = sorted2[index2++];
-        }
-        return result;
     }
 
 
