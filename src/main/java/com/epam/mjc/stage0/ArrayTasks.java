@@ -118,7 +118,7 @@ public class ArrayTasks {
      */
     public int[][] sortRaggedArray(int[][] arr) {
         for (int i = 0; i < arr.length; i++) {
-            arr[i] = mergeSort(arr[i]);
+            mergeSort(arr[i],0,arr[i].length - 1);
         }
         sortLength(arr);
         return arr;
