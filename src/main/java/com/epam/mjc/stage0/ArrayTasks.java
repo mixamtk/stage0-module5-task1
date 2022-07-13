@@ -143,7 +143,8 @@ public class ArrayTasks {
              // В освободившееся место вставляем вытащенное значение
              arr[i + 1] = valueArr;
          }
-             public static int[] mergeSort(int[] array1) {
+         }         
+    public static int[] mergeSort(int[] array1) {
         int[] buffer1 = Arrays.copyOf(array1, array1.length);
         int[] buffer2 = new int[array1.length];
         int[] result = mergeSortInner(buffer1, buffer2, 0, array1.length);
@@ -179,5 +180,5 @@ public class ArrayTasks {
         return result;
     }
 
-}
+
 }
