@@ -60,7 +60,7 @@ public class ArrayTasks {
     public int findIndexOfNumber(int[] arr, int number) {
         int result = -1;
         for (int i = 0; i < arr.length; i++) {
-            if (number == arr[i]) result = i;
+            if (number == arr[i]) result = i + 1;
         }
         return result;
     }
