@@ -61,6 +61,7 @@ public class ArrayTasks {
         int result = -1;
         for (int i = 0; i < arr.length; i++) {
             if (number == arr[i]) result = i ;
+            break;
         }
         return result;
     }
@@ -103,7 +104,7 @@ public class ArrayTasks {
         for (int i = 0; i < arr.length; i++) {
             if (arr[i] > 0) {result[indResult] = arr[i]; indResult++;}
         }
-        return arr;
+        return result;
     }
 
     /**
